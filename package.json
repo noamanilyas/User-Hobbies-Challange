@@ -1,7 +1,7 @@
 {
-  "name": "typeapi",
+  "name": "userhobbies",
   "version": "1.0.0",
-  "description": "RestApi Implementation",
+  "description": "User Hobbies Rest API Implementation",
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
