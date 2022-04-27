@@ -1,0 +1,362 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
+    "version": "1.0.0",
+    "title": "User Hobbies APIs",
+    "contact": {
+      "email": "noaman.ilyas@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": ["http"],
+  "host": "localhost:3080",
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Get all the users",
+        "description": "Get all the users",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AllUsersGetResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Save new user",
+        "description": "Save new user",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "task object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Darius Tanz"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserCreateResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/hobbies/{userId}": {
+      "get": {
+        "summary": "Save the task",
+        "description": "Save the task",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserHobbies"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/hobbies": {
+      "post": {
+        "summary": "Save new hobby",
+        "description": "Save new hobby",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "task object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "626915f6afc419903ed28544"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Cycling"
+                },
+                "passionLevel": {
+                  "type": "string",
+                  "example": "High"
+                },
+                "year": {
+                  "type": "integer",
+                  "example": 2021
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserHobbiesCreate"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete hobby",
+        "description": "Delete hobby",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "task object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "626915f6afc419903ed28544"
+                },
+                "hobbyId": {
+                  "type": "string",
+                  "example": "626925ed0b09a02200f47186"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeleteHobby"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllUsersGetResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "626922d33ceda11d7b5a06ec"
+              },
+              "name": {
+                "type": "string",
+                "example": "Darius Tanz"
+              }
+            }
+          }
+        },
+        "error": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "UserCreateResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "626922d33ceda11d7b5a06ec"
+            },
+            "name": {
+              "type": "string",
+              "example": "Darius Tanz"
+            }
+          }
+        },
+        "error": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "UserHobbies": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "626922d33ceda11d7b5a06ec"
+              },
+              "passionLevel": {
+                "type": "string",
+                "example": "Low"
+              },
+              "name": {
+                "type": "string",
+                "example": "Fishing"
+              },
+              "year": {
+                "type": "string",
+                "example": "2021"
+              }
+            }
+          }
+        },
+        "error": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "UserHobbiesCreate": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "626922d33ceda11d7b5a06ec"
+            },
+            "passionLevel": {
+              "type": "string",
+              "example": "Low"
+            },
+            "name": {
+              "type": "string",
+              "example": "Fishing"
+            },
+            "year": {
+              "type": "integer",
+              "example": 2021
+            }
+          }
+        },
+        "error": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "DeleteHobby": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "object"
+        },
+        "error": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "InvalidResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
