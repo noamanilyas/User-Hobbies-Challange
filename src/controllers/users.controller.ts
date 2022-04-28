@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import * as Joi from "joi";
-import NotFoundError from "../core/error/notFound.error";
 import ValidationError from "../core/error/validation.error";
 import { errorResponse, successResponse } from "../core/handlers/api-response.handler";
 import { User } from "../models/users.model";
@@ -8,10 +7,6 @@ import { User } from "../models/users.model";
 export async function getAll(req: Request, res: Response) {
   try {
     const users = await User.find();
-
-    if (!users.length) {
-      throw new NotFoundError("Users not found");
-    }
 
     const response = users.map((item) => ({
       id: item._id,

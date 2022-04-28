@@ -27,12 +27,6 @@
             "schema": {
               "$ref": "#/definitions/AllUsersGetResponse"
             }
-          },
-          "400": {
-            "description": "Invalid status value",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
           }
         }
       },

@@ -21,14 +21,10 @@ export async function getUserHobbies(req: Request, res: Response) {
     const user = await User.findById(userId);
 
     if (!user) {
-      throw new NotFoundError("Users not found");
+      successResponse(res, []);
     }
 
     const hobbies = await Hobbies.find({ _id: { $in: user.hobbies } });
-
-    if (!hobbies.length) {
-      throw new NotFoundError("Hobbies not found");
-    }
 
     const response = hobbies.map((item) => ({
       id: item._id,

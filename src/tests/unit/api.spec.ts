@@ -54,11 +54,6 @@ describe("API Test", () => {
     expect(res.body.result).toEqual([{ id: mockHobbyId, ...hobbyData }]);
   });
 
-  it("GET hobbies Not Found Error: Get user hobbies from db", async () => {
-    const res = await request.get("/hobbies/62693de8acf0b9cc14a396c6");
-    expect(res.status).toBe(404);
-  });
-
   it("GET hobbies Error: Get user hobbies from db", async () => {
     const res = await request.get("/hobbies/invalidId");
     expect(res.status).toBe(400);
